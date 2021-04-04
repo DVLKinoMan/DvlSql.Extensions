@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="Dvl_Sql">
+      <HintPath>..\..\DvlSql\Dvl_Sql\bin\Debug\net5.0\Dvl_Sql.dll</HintPath>
+    </Reference>
+    <Reference Include="System.CustomModels">
+      <HintPath>..\..\System.CustomModels\System.CustomModels\bin\Debug\net5.0\System.CustomModels.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
