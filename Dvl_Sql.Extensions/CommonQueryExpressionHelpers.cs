@@ -18,10 +18,10 @@ namespace Dvl_Sql.Extensions
         }
 
 #nullable enable
-        public static IEnumerable<DvlSqlFilter> Id(IEnumerable<int>? ids)
+        public static IEnumerable<DvlSqlFilter> Id(string tableAlias, IEnumerable<int>? ids)
         {
             if (ids is {} notNullIds)
-                yield return new DvlSqlWhereFilter(InExp("ID", notNullIds.Select(id => ConstantExp(id)).ToArray()));
+                yield return new DvlSqlWhereFilter(InExp($"{tableAlias}.Id", notNullIds.Select(id => ConstantExp(id)).ToArray()));
         }
 #nullable restore
     }

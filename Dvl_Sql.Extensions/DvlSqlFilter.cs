@@ -31,7 +31,7 @@ namespace Dvl_Sql.Extensions
         {
             this.JoinType = joinType;
             this.TableName = tableName;
-            this.CompExpression = ConstantExp(firstTableMatchingCol) == ConstantExp(secondTableMatchingCol);
+            this.CompExpression = ConstantExpCol(firstTableMatchingCol) == ConstantExpCol(secondTableMatchingCol);
         }
 
         public DvlSqlJoinFilter(JoinType joinType, string tableName, DvlSqlComparisonExpression compExpression)
