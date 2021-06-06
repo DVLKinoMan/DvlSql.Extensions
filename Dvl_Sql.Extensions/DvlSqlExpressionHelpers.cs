@@ -1,5 +1,5 @@
-﻿using System.CustomModels;
-using Dvl_Sql.Expressions;
+﻿using Dvl_Sql.Expressions;
+using System.CustomModels.Filters;
 using static Dvl_Sql.Helpers.Expressions;
 
 namespace Dvl_Sql.Extensions
