@@ -1,12 +1,12 @@
-﻿using Dvl_Sql.Abstract;
-using Dvl_Sql.Expressions;
-using Dvl_Sql.Models;
+﻿using DvlSql.Abstract;
+using DvlSql.Expressions;
+using DvlSql.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using static Dvl_Sql.Helpers.Expressions;
+using static DvlSql.ExpressionHelpers;
 
-namespace Dvl_Sql.Extensions
+namespace DvlSql.Extensions
 {
     public enum JoinType
     {

@@ -5,8 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Reference Include="Dvl_Sql">
-      <HintPath>..\..\DvlSql\Dvl_Sql\bin\Debug\net5.0\Dvl_Sql.dll</HintPath>
+    <Reference Include="DvlSql">
+      <HintPath>..\..\DvlSql\Dvl_Sql\bin\Debug\net5.0\DvlSql.dll</HintPath>
     </Reference>
     <Reference Include="System.CustomModels">
       <HintPath>..\..\System.CustomModels\System.CustomModels\bin\Debug\net5.0\System.CustomModels.dll</HintPath>

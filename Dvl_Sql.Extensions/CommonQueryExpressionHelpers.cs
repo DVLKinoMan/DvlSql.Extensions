@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.CustomModels.Filters;
 using System.Linq;
-using static Dvl_Sql.Helpers.Expressions;
+using static DvlSql.ExpressionHelpers;
 
-namespace Dvl_Sql.Extensions
+namespace DvlSql.Extensions
 {
     public static class CommonQueryExpressionHelpers
     {

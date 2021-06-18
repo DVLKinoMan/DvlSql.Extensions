@@ -1,11 +1,11 @@
-﻿using Dvl_Sql.Abstract;
+﻿using DvlSql.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Dvl_Sql.Extensions
+namespace DvlSql.Extensions
 {
     public static class Exts
     {
