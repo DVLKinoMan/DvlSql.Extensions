@@ -1,10 +1,8 @@
-﻿using DvlSql.Abstract;
-using DvlSql.Expressions;
-using DvlSql.Models;
+﻿using DvlSql.Expressions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using static DvlSql.ExpressionHelpers;
+using static DvlSql.Extensions.ExpressionHelpers;
 
 namespace DvlSql.Extensions
 {

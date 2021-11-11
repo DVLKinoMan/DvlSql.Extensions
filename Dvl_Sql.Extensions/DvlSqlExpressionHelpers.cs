@@ -1,6 +1,6 @@
 ﻿using DvlSql.Expressions;
 using System.CustomModels.Filters;
-using static DvlSql.ExpressionHelpers;
+using static DvlSql.Extensions.ExpressionHelpers;
 
 namespace DvlSql.Extensions
 {

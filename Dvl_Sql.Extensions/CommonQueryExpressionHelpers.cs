@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.CustomModels.Filters;
 using System.Linq;
-using static DvlSql.ExpressionHelpers;
+using static DvlSql.Extensions.ExpressionHelpers;
 
 namespace DvlSql.Extensions
 {
