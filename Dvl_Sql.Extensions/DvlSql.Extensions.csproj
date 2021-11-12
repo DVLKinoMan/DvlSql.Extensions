@@ -11,6 +11,9 @@
     <Reference Include="System.CustomModels">
       <HintPath>..\..\System.CustomModels\System.CustomModels\bin\Debug\net5.0\System.CustomModels.dll</HintPath>
     </Reference>
+    <Reference Include="System.Extensions">
+      <HintPath>..\..\System.Extensions\System.Extensions\bin\Debug\net5.0\System.Extensions.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>
