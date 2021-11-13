@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using static System.Extensions.Exts;
+using static System.Exts.Extensions;
 
 namespace DvlSql.Extensions
 {
