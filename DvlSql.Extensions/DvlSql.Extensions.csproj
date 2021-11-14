@@ -1,18 +1,18 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>3.0.0</Version>
+    <Authors>David Dvali</Authors>
+    <RepositoryUrl>https://github.com/DVLKinoMan/DvlSql.Extensions</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/DVLKinoMan/DvlSql.Extensions</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="DvlSql" Version="3.0.0" />
     <PackageReference Include="SystemNET.CustomModels" Version="1.0.0" />
     <PackageReference Include="SystemNET.Exts" Version="1.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="DvlSql">
-      <HintPath>..\..\DvlSql\DvlSql\bin\Debug\net5.0\DvlSql.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
 </Project>
