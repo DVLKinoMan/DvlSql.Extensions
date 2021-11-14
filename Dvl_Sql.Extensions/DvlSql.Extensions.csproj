@@ -1,8 +1,12 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SystemNET.Exts" Version="1.0.0" />
+  </ItemGroup>
 
   <ItemGroup>
     <Reference Include="DvlSql">
@@ -10,9 +14,6 @@
     </Reference>
     <Reference Include="System.CustomModels">
       <HintPath>..\..\System.CustomModels\System.CustomModels\bin\Debug\net5.0\System.CustomModels.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Exts">
-      <HintPath>..\..\System.Extensions\System.Extensions\bin\Debug\net5.0\System.Exts.dll</HintPath>
     </Reference>
   </ItemGroup>
 
