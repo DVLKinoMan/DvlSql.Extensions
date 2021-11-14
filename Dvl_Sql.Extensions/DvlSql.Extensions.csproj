@@ -5,15 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="SystemNET.CustomModels" Version="1.0.0" />
     <PackageReference Include="SystemNET.Exts" Version="1.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <Reference Include="DvlSql">
       <HintPath>..\..\DvlSql\Dvl_Sql\bin\Debug\net5.0\DvlSql.dll</HintPath>
-    </Reference>
-    <Reference Include="System.CustomModels">
-      <HintPath>..\..\System.CustomModels\System.CustomModels\bin\Debug\net5.0\System.CustomModels.dll</HintPath>
     </Reference>
   </ItemGroup>
 
