@@ -11,7 +11,7 @@
 
   <ItemGroup>
     <Reference Include="DvlSql">
-      <HintPath>..\..\DvlSql\Dvl_Sql\bin\Debug\net5.0\DvlSql.dll</HintPath>
+      <HintPath>..\..\DvlSql\DvlSql\bin\Debug\net5.0\DvlSql.dll</HintPath>
     </Reference>
   </ItemGroup>
 
