@@ -8,7 +8,7 @@ namespace DvlSql.Extensions
 {
     public static class Exts
     {
-        public static T GetVal<T>(this IDataReader reader, string param, T def = default) => reader[param] != DBNull.Value ? (T)reader[param] : def;
+        public static T? GetVal<T>(this IDataReader reader, string param, T? def = default) => reader[param] != DBNull.Value ? (T)reader[param] : def;
 
         public static async Task<T> GetAsync<T>(this ISelector @from, DvlSqlFilter filter,
             Func<IDataReader, T> selector)
@@ -80,7 +80,7 @@ namespace DvlSql.Extensions
                     yield return filter;
         }
 
-        public static TSource AggregateIfNotNull<TSource>(this IEnumerable<TSource> enumerable,
+        public static TSource? AggregateIfNotNull<TSource>(this IEnumerable<TSource> enumerable,
             Func<TSource, TSource, TSource> func)
         {
             var source = enumerable as TSource[] ?? enumerable.ToArray();

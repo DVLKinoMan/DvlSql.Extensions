@@ -17,12 +17,10 @@ namespace DvlSql.Extensions
                 yield return new DvlSqlWhereFilter(LikeExp(fieldName, $"{name.Pattern}"));
         }
 
-#nullable enable
         public static IEnumerable<DvlSqlFilter> Id(string tableAlias, IEnumerable<int>? ids)
         {
             if (ids is {} notNullIds)
                 yield return new DvlSqlWhereFilter(InExp($"{tableAlias}.Id", notNullIds.Select(id => ConstantExp(id)).ToArray()));
         }
-#nullable restore
     }
 }

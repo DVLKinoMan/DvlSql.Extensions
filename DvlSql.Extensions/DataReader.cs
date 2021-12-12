@@ -38,10 +38,10 @@ namespace DvlSql.Extensions
                 ? selector(reader)
                 : throw new InvalidOperationException("There was no element in sequence");
 
-        public static Func<IDataReader, TResult> FirstOrDefault<TResult>(Func<IDataReader, TResult> selector) =>
+        public static Func<IDataReader, TResult?> FirstOrDefault<TResult>(Func<IDataReader, TResult> selector) =>
             reader => reader.Read() ? selector(reader) : default;
 
-        public static Func<IDataReader, TResult> Single<TResult>(Func<IDataReader, TResult> selector) =>
+        public static Func<IDataReader, TResult?> Single<TResult>(Func<IDataReader, TResult> selector) =>
             reader =>
                 IsSingleDataReader(reader, selector) switch
                 {
@@ -50,7 +50,7 @@ namespace DvlSql.Extensions
                         "There was no element in sequence or there was more than 1 elements")
                 };
 
-        public static Func<IDataReader, TResult> SingleOrDefault<TResult>(Func<IDataReader, TResult> selector) =>
+        public static Func<IDataReader, TResult?> SingleOrDefault<TResult>(Func<IDataReader, TResult> selector) =>
             reader =>
                 IsSingleDataReader(reader, selector) switch
                 {
@@ -58,7 +58,7 @@ namespace DvlSql.Extensions
                     _ => default
                 };
 
-        private static (bool isSingle, TResult result) IsSingleDataReader<TResult>(IDataReader reader, Func<IDataReader, TResult> func)
+        private static (bool isSingle, TResult? result) IsSingleDataReader<TResult>(IDataReader reader, Func<IDataReader, TResult> func)
         {
             if (!reader.Read())
                 return (default, default);
