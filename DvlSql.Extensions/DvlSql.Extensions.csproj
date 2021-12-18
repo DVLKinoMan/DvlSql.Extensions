@@ -4,14 +4,14 @@
     <TargetFramework>net6.0</TargetFramework>
 	  <Nullable>enable</Nullable>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>3.0.1</Version>
+    <Version>3.0.3</Version>
     <Authors>David Dvali</Authors>
     <RepositoryUrl>https://github.com/DVLKinoMan/DvlSql.Extensions</RepositoryUrl>
     <PackageProjectUrl>https://github.com/DVLKinoMan/DvlSql.Extensions</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="DvlSql" Version="3.0.1" />
+    <PackageReference Include="DvlSql" Version="3.0.3" />
     <PackageReference Include="SystemNET.CustomModels" Version="1.0.0" />
     <PackageReference Include="SystemNET.Exts" Version="1.1.0" />
   </ItemGroup>

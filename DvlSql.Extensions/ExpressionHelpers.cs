@@ -134,10 +134,10 @@ namespace DvlSql.Extensions
         public static DvlSqlFullSelectExpression FullSelectExp(
             DvlSqlSelectExpression @select,
             DvlSqlFromExpression @from,
-            DvlSqlAsExpression @as = null,
-            List<DvlSqlJoinExpression> @join = null, DvlSqlWhereExpression @where = null,
-            DvlSqlGroupByExpression groupBy = null, DvlSqlOrderByExpression orderBy = null,
-            DvlSqlSkipExpression skip = null) =>
+            DvlSqlAsExpression? @as = null,
+            List<DvlSqlJoinExpression>? @join = null, DvlSqlWhereExpression? @where = null,
+            DvlSqlGroupByExpression? groupBy = null, DvlSqlOrderByExpression? orderBy = null,
+            DvlSqlSkipExpression? skip = null) =>
             new DvlSqlFullSelectExpression(@from, @join, @where, groupBy,
                 @select, orderBy, skip, @as);
 
