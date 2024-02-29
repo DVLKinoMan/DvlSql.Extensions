@@ -41,11 +41,11 @@ namespace DvlSql.Extensions
         public static Func<IDataReader, TResult?> FirstOrDefault<TResult>(Func<IDataReader, TResult> selector) =>
             reader => reader.Read() ? selector(reader) : default;
 
-        public static Func<IDataReader, TResult?> Single<TResult>(Func<IDataReader, TResult> selector) =>
+        public static Func<IDataReader, TResult> Single<TResult>(Func<IDataReader, TResult> selector) =>
             reader =>
                 IsSingleDataReader(reader, selector) switch
                 {
-                    (true, var value) => value,
+                    (true, var value) => value!,
                     _ => throw new InvalidOperationException(
                         "There was no element in sequence or there was more than 1 elements")
                 };
