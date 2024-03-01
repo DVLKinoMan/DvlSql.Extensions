@@ -26,7 +26,7 @@ namespace DvlSql.Extensions
                     var key = keySelector(reader);
                     var value = valueSelector(reader);
                     if (!dict.TryGetValue(key, out var collection))
-                        dict.Add(key, new List<TValue>() {value});
+                        dict.Add(key, [value]);
                     else collection.Add(value);
                 }
 

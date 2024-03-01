@@ -76,7 +76,7 @@ namespace DvlSql.Extensions
         {
             foreach (var filters in filtersArr)
             foreach (var filter in filters)
-                if (!(filter is DvlSqlEmptyFilter))
+                if (filter is not DvlSqlEmptyFilter)
                     yield return filter;
         }
 

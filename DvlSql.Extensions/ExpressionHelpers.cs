@@ -25,7 +25,7 @@ namespace DvlSql.Extensions
             : $"COALESCE({param}, {change})";
 
         public static DvlSqlAsExpression AsExp(string @as, IEnumerable<string> @params = null, bool useAs = true) =>
-            new DvlSqlAsExpression(@as, @params, useAs);
+            new(@as, @params, useAs);
         
         public static string MonthExp(string param) => $"MONTH({param})";
         public static string DayExp(string param) => $"DAY({param})";
@@ -42,49 +42,51 @@ namespace DvlSql.Extensions
             new DvlSqlWhereExpression(innerExpression).WithRoot(isRoot);
 
         public static DvlSqlAndExpression AndExp(params DvlSqlBinaryExpression[] innerExpressions) =>
-            new DvlSqlAndExpression(innerExpressions);
+            new(innerExpressions);
 
         public static DvlSqlAndExpression AndExp(IEnumerable<DvlSqlBinaryExpression> innerExpressions) =>
-            new DvlSqlAndExpression(innerExpressions);
+            new(innerExpressions);
 
         public static DvlSqlComparisonExpression ComparisonExp(DvlSqlConstantExpression leftExp,
             SqlComparisonOperator op,
             DvlSqlConstantExpression rightExp)
-            => new DvlSqlComparisonExpression(leftExp, op, rightExp);
+            => new(leftExp, op, rightExp);
 
         public static DvlSqlConstantExpression<TValue> ConstantExpCol<TValue>(TValue value) =>
-            new DvlSqlConstantExpression<TValue>(value, true);
+            new(value, true);
 
         public static DvlSqlConstantExpression<TValue> ConstantExp<TValue>(TValue value, bool isTableColumn = false) =>
-            new DvlSqlConstantExpression<TValue>(value, isTableColumn);
+            new(value, isTableColumn);
 
         public static DvlSqlOrExpression OrExp(params DvlSqlBinaryExpression[] innerExpressions) =>
-            new DvlSqlOrExpression(innerExpressions);
+            new(innerExpressions);
 
         public static DvlSqlInExpression InExp(string parameterName, params DvlSqlExpression[] innerExpressions) =>
-            new DvlSqlInExpression(parameterName, innerExpressions);
+            new(parameterName, innerExpressions);
 
         public static DvlSqlSelectExpression SelectExp(int? topNum = null,
             bool isRoot = false) =>
-            new DvlSqlSelectExpression(topNum); //.WithRoot(isRoot);
+            new(topNum); //.WithRoot(isRoot);
 
         public static DvlSqlSelectExpression SelectExp(int? topNum = null,
             params string[] paramNames) =>
-            new DvlSqlSelectExpression(paramNames.ToHashSet(), topNum);
+            new([.. paramNames], topNum);
 
         public static DvlSqlSelectExpression SelectExp(IEnumerable<string> paramNames,
             int? topNum = null) =>
-            new DvlSqlSelectExpression(paramNames.ToHashSet(), topNum);
+            new(paramNames.ToHashSet(), topNum);
 
         public static DvlSqlFromWithTableExpression FromExp(string tableName, string @as, bool withNoLock = false)
         {
-            var from = new DvlSqlFromWithTableExpression(tableName, withNoLock);
-            from.As = AsExp(@as);
+            var from = new DvlSqlFromWithTableExpression(tableName, withNoLock)
+            {
+                As = AsExp(@as)
+            };
             return from;
         }
 
         public static DvlSqlFromWithTableExpression FromExp(string tableName, bool withNoLock = false) =>
-            new DvlSqlFromWithTableExpression(tableName, withNoLock);
+            new(tableName, withNoLock);
 
         public static DvlSqlFromExpression FromExp(DvlSqlFullSelectExpression select, string @as = null)
         {
@@ -107,14 +109,14 @@ namespace DvlSql.Extensions
             new DvlSqlValuesExpression<T>(values, @as, sqlParameters);
 
         public static DvlSqlSelectExpression SelectExp(params string[] paramNames) =>
-            new DvlSqlSelectExpression(paramNames); //.WithRoot(false);
+            new(paramNames); //.WithRoot(false);
 
         public static DvlSqlSelectExpression SelectTopExp(int topNum,
             params string[] paramNames) =>
-            new DvlSqlSelectExpression(paramNames.ToHashSet(), topNum); //.WithRoot(false);
+            new([.. paramNames], topNum); //.WithRoot(false);
 
         public static DvlSqlLikeExpression LikeExp(string field, string pattern) =>
-            new DvlSqlLikeExpression(field, pattern);
+            new(field, pattern);
 
         public static DvlSqlBinaryExpression NotExp(DvlSqlBinaryExpression binaryExpression) =>
             !binaryExpression;
@@ -127,7 +129,7 @@ namespace DvlSql.Extensions
             NotExp(LikeExp(field, pattern));
 
         public static DvlSqlIsNullExpression IsNullExp(DvlSqlExpression expression) =>
-            new DvlSqlIsNullExpression(expression);
+            new(expression);
 
         public static DvlSqlBinaryExpression IsNotNullExp(DvlSqlExpression expression) => NotExp(IsNullExp(expression));
 
@@ -138,71 +140,71 @@ namespace DvlSql.Extensions
             List<DvlSqlJoinExpression>? @join = null, DvlSqlWhereExpression? @where = null,
             DvlSqlGroupByExpression? groupBy = null, DvlSqlOrderByExpression? orderBy = null,
             DvlSqlSkipExpression? skip = null) =>
-            new DvlSqlFullSelectExpression(@from, @join, @where, groupBy,
+            new(@from, @join, @where, groupBy,
                 @select, orderBy, skip, @as);
 
         public static DvlSqlOrderByExpression OrderByExp(params (string column, Ordering ordering)[] @params) =>
-            new DvlSqlOrderByExpression(@params);
+            new(@params);
 
         public static DvlSqlExistsExpression ExistsExp(DvlSqlFullSelectExpression select) =>
-            new DvlSqlExistsExpression(select);
+            new(select);
 
         public static DvlSqlSkipExpression SkipExp(int offsetRows, int? fetchNextRows = null) =>
-            new DvlSqlSkipExpression(offsetRows, fetchNextRows);
+            new(offsetRows, fetchNextRows);
 
         public static DvlSqlGroupByExpression GroupByExp(params string[] paramNames) =>
-            new DvlSqlGroupByExpression(paramNames);
+            new(paramNames);
 
         public static DvlSqlTableDeclarationExpression DeclareTableExp(string name) =>
-            new DvlSqlTableDeclarationExpression(name);
+            new(name);
 
         public static DvlSqlOutputExpression
             OutputExp(DvlSqlTableDeclarationExpression intoTable, params string[] cols) =>
-            new DvlSqlOutputExpression(intoTable, cols);
+            new(intoTable, cols);
 
         public static DvlSqlOutputExpression OutputExp(params string[] cols) =>
-            new DvlSqlOutputExpression(cols);
+            new(cols);
 
         public static DvlSqlValuesExpression<T> ValuesExp<T>(params T[] values) where T : ITuple =>
-            new DvlSqlValuesExpression<T>(values);
+            new(values);
 
         public static DvlSqlInnerJoinExpression InnerJoinExp(string tableName,
             string firstTableMatchingCol, string secondTableMatchingCol)
-            => new DvlSqlInnerJoinExpression(tableName,
+            => new(tableName,
                 ConstantExpCol(firstTableMatchingCol) == ConstantExpCol(secondTableMatchingCol));
 
         public static DvlSqlLeftJoinExpression LeftJoinExp(string tableName,
             string firstTableMatchingCol, string secondTableMatchingCol)
-            => new DvlSqlLeftJoinExpression(tableName, 
+            => new(tableName,
                 ConstantExpCol(firstTableMatchingCol) == ConstantExpCol(secondTableMatchingCol));
 
         public static DvlSqlRightJoinExpression RightJoinExp(string tableName,
             string firstTableMatchingCol, string secondTableMatchingCol)
-            => new DvlSqlRightJoinExpression(tableName, 
+            => new(tableName,
                 ConstantExpCol(firstTableMatchingCol) == ConstantExpCol(secondTableMatchingCol));
 
         public static DvlSqlFullJoinExpression FullJoinExp(string tableName,
             string firstTableMatchingCol, string secondTableMatchingCol)
-            => new DvlSqlFullJoinExpression(tableName, 
+            => new(tableName, 
                 ConstantExpCol(firstTableMatchingCol) == ConstantExpCol(secondTableMatchingCol));
 
         public static DvlSqlInnerJoinExpression InnerJoinExp(string tableName,
             DvlSqlComparisonExpression comparisonExpression)
-            => new DvlSqlInnerJoinExpression(tableName, comparisonExpression);
+            => new(tableName, comparisonExpression);
 
         public static DvlSqlLeftJoinExpression LeftJoinExp(string tableName,
             DvlSqlComparisonExpression comparisonExpression)
-            => new DvlSqlLeftJoinExpression(tableName, comparisonExpression);
+            => new(tableName, comparisonExpression);
 
         public static DvlSqlRightJoinExpression RightJoinExp(string tableName,
             DvlSqlComparisonExpression comparisonExpression)
-            => new DvlSqlRightJoinExpression(tableName, comparisonExpression);
+            => new(tableName, comparisonExpression);
 
         public static DvlSqlFullJoinExpression FullJoinExp(string tableName,
             DvlSqlComparisonExpression comparisonExpression)
-            => new DvlSqlFullJoinExpression(tableName, comparisonExpression);
+            => new(tableName, comparisonExpression);
 
-        public static DvlSqlBinaryEmptyExpression EmptyExp() => new DvlSqlBinaryEmptyExpression();
+        public static DvlSqlBinaryEmptyExpression EmptyExp() => new ();
 
     }
 }

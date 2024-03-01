@@ -11,9 +11,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="DvlSql" Version="3.0.3" />
+    <PackageReference Include="DvlSql" Version="3.1.0" />
     <PackageReference Include="SystemNET.CustomModels" Version="1.0.0" />
-    <PackageReference Include="SystemNET.Exts" Version="1.1.0" />
+    <PackageReference Include="SystemNET.Exts" Version="3.1.0" />
   </ItemGroup>
 
 </Project>

@@ -70,16 +70,10 @@ namespace DvlSql.Extensions
         }
     }
 
-    public class DvlSqlWhereFilter : DvlSqlFilter
+    public class DvlSqlWhereFilter(DvlSqlBinaryExpression binaryExpression, params DvlSqlParameter[] parameters) : DvlSqlFilter
     {
-        public DvlSqlBinaryExpression BinaryExpression { get; private set; }
-        public IEnumerable<DvlSqlParameter> Parameters { get; set; }
-
-        public DvlSqlWhereFilter(DvlSqlBinaryExpression binaryExpression, params DvlSqlParameter[] parameters)
-        {
-            this.BinaryExpression = binaryExpression;
-            this.Parameters = parameters;
-        }
+        public DvlSqlBinaryExpression BinaryExpression { get; private set; } = binaryExpression;
+        public IEnumerable<DvlSqlParameter> Parameters { get; set; } = parameters;
 
         public static DvlSqlWhereFilter operator &(DvlSqlWhereFilter @this, DvlSqlWhereFilter other)
         {
