@@ -16,7 +16,7 @@ namespace DvlSql.Extensions
 
     public abstract class DvlSqlFilter
     {
-        public static DvlSqlFilter Empty = new DvlSqlEmptyFilter();
+        public static readonly DvlSqlFilter Empty = new DvlSqlEmptyFilter();
     }
 
     public class DvlSqlJoinFilter : DvlSqlFilter
@@ -57,8 +57,10 @@ namespace DvlSql.Extensions
 
     public class DvlSqlJoinFilterEqualityComparer : IEqualityComparer<DvlSqlJoinFilter>
     {
-        public bool Equals(DvlSqlJoinFilter x, DvlSqlJoinFilter y)
+        public bool Equals(DvlSqlJoinFilter? x, DvlSqlJoinFilter? y)
         {
+            ArgumentNullException.ThrowIfNull(x);
+            ArgumentNullException.ThrowIfNull(y);
             if (x.JoinType != y.JoinType)
                 return false;
             return x.TableName == y.TableName;

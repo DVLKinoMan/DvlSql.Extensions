@@ -21,10 +21,10 @@ namespace DvlSql.Extensions
         public static string CoalesceExp<T>(string param, T change) => 
             typeof(T) == typeof(string) || typeof(T) == typeof(Guid) || typeof(T) == typeof(Guid?) 
             || typeof(T) == typeof(DateTime) || typeof(T) == typeof(DateTime?)
-            ? $"COALESCE({param}, '{(change is DateTime dt ? dt.ToString(CultureInfo.InvariantCulture) : change.ToString())}')"
+            ? $"COALESCE({param}, '{(change is DateTime dt ? dt.ToString(CultureInfo.InvariantCulture) : change!.ToString())}')"
             : $"COALESCE({param}, {change})";
 
-        public static DvlSqlAsExpression AsExp(string @as, IEnumerable<string> @params = null, bool useAs = true) =>
+        public static DvlSqlAsExpression AsExp(string @as, IEnumerable<string>? @params = null, bool useAs = true) =>
             new(@as, @params, useAs);
         
         public static string MonthExp(string param) => $"MONTH({param})";
@@ -64,8 +64,7 @@ namespace DvlSql.Extensions
         public static DvlSqlInExpression InExp(string parameterName, params DvlSqlExpression[] innerExpressions) =>
             new(parameterName, innerExpressions);
 
-        public static DvlSqlSelectExpression SelectExp(int? topNum = null,
-            bool isRoot = false) =>
+        public static DvlSqlSelectExpression SelectExp(int? topNum = null) => //, bool isRoot = false) =>
             new(topNum); //.WithRoot(isRoot);
 
         public static DvlSqlSelectExpression SelectExp(int? topNum = null,
@@ -88,14 +87,14 @@ namespace DvlSql.Extensions
         public static DvlSqlFromWithTableExpression FromExp(string tableName, bool withNoLock = false) =>
             new(tableName, withNoLock);
 
-        public static DvlSqlFromExpression FromExp(DvlSqlFullSelectExpression select, string @as = null)
+        public static DvlSqlFromExpression FromExp(DvlSqlFullSelectExpression select, string? @as = null)
         {
             if (@as != null)
                 select.As = AsExp(@as);
             return select;
         }
 
-        public static DvlSqlFromExpression FromExp(DvlSqlFromWithTableExpression fromWithTable, string @as = null)
+        public static DvlSqlFromExpression FromExp(DvlSqlFromWithTableExpression fromWithTable, string? @as = null)
         {
             if (@as != null)
                 fromWithTable.As = AsExp(@as);

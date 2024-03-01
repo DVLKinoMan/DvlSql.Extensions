@@ -43,7 +43,7 @@ namespace DvlSql.Extensions
 
         public static IEnumerable<DvlSqlParameter> GetSqlParameters(ITuple[] @params, DvlSqlType[] types)
         {
-            if (types?.Length == 0)
+            if (types.Length == 0)
                 yield break;
 
             int count = 1;
@@ -70,10 +70,10 @@ namespace DvlSql.Extensions
                 var type = typeof(DvlSqlType<>).MakeGenericType(genericTypeArgument);
                 var dvlSqlType =
                     Activator.CreateInstance(type,
-                        new[] {param[i], types[i], false}); //added false value, maybe not right
+                        [param[i], types[i], false]); //added false value, maybe not right
                 var type2 = typeof(DvlSqlParameter<>).MakeGenericType(genericTypeArgument);
-                string? name = $"{types[i].Name.WithAlpha()}{count}";
-                yield return (DvlSqlParameter) Activator.CreateInstance(type2, new object[] {name, dvlSqlType!})!;
+                string? name = $"{types[i].Name?.WithAlpha()}{count}";
+                yield return (DvlSqlParameter) Activator.CreateInstance(type2, [name, dvlSqlType!])!;
             }
         }
 
