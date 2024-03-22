@@ -69,7 +69,7 @@ namespace DvlSql.Extensions
 
         public static DvlSqlSelectExpression SelectExp(int? topNum = null,
             params string[] paramNames) =>
-            new([.. paramNames], topNum);
+            new(paramNames.ToHashSet(), topNum);
 
         public static DvlSqlSelectExpression SelectExp(IEnumerable<string> paramNames,
             int? topNum = null) =>
@@ -112,7 +112,7 @@ namespace DvlSql.Extensions
 
         public static DvlSqlSelectExpression SelectTopExp(int topNum,
             params string[] paramNames) =>
-            new([.. paramNames], topNum); //.WithRoot(false);
+            new(paramNames.ToHashSet(), topNum); //.WithRoot(false);
 
         public static DvlSqlLikeExpression LikeExp(string field, string pattern) =>
             new(field, pattern);
