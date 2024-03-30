@@ -1,11 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Exts;
 
 namespace DvlSql.Extensions
 {
     public static class DataReader
     {
+        public static Func<IDataReader, TResult> RecordReaderFunc<TResult>() =>
+            reader =>
+            {
+                if (typeof(TResult).IsClass && typeof(TResult).Namespace != "System")
+                    return reader.GetObjectOfType<TResult>();
+
+                return (TResult)reader[0];
+            };
+
+        public static T GetObjectOfType<T>(this IDataReader r)
+        {
+            var instance = Activator.CreateInstance<T>();
+            foreach (var innerProp in typeof(T).GetProperties())
+                if (innerProp.PropertyType.Namespace == "System" &&
+                    !innerProp.PropertyType.IsGenericType(typeof(ICollection<>)) &&
+                    r[innerProp.Name] != DBNull.Value)
+                    innerProp.SetValue(instance, r[innerProp.Name]);
+
+            return instance;
+        }
+
         public static Func<IDataReader, List<TResult>> AsList<TResult>(Func<IDataReader, TResult> selector) =>
             reader =>
         {
