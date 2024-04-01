@@ -7,25 +7,29 @@ namespace DvlSql.Extensions
 {
     public static class DataReader
     {
-        public static Func<IDataReader, TResult> RecordReaderFunc<TResult>() =>
-            reader =>
-            {
-                if (typeof(TResult).IsClass && typeof(TResult).Namespace != "System")
-                    return reader.GetObjectOfType<TResult>();
+        public static Func<IDataReader, TResult?> RecordReaderFunc<TResult>(Func<TResult>? defaultFunc = null)
+            => reader =>
+              {
+                  if (typeof(TResult).IsClass && typeof(TResult).Namespace != "System")
+                      return GetObjectOfType(reader, defaultFunc);
 
-                return (TResult)reader[0];
-            };
+                  return reader[0] != DBNull.Value ? (TResult?)reader[0] : defaultFunc == null ? default : defaultFunc();
+              };
 
-        public static T GetObjectOfType<T>(this IDataReader r)
+        public static T? GetObjectOfType<T>(this IDataReader r, Func<T>? defaultFunc = null)
         {
             var instance = Activator.CreateInstance<T>();
+            bool anyPropertySet = false;
             foreach (var innerProp in typeof(T).GetProperties())
                 if (innerProp.PropertyType.Namespace == "System" &&
                     !innerProp.PropertyType.IsGenericType(typeof(ICollection<>)) &&
                     r[innerProp.Name] != DBNull.Value)
+                {
+                    anyPropertySet = true;
                     innerProp.SetValue(instance, r[innerProp.Name]);
+                }
 
-            return instance;
+            return anyPropertySet ? instance : defaultFunc == null ? default : defaultFunc();
         }
 
         public static Func<IDataReader, List<TResult>> AsList<TResult>(Func<IDataReader, TResult> selector) =>
