@@ -20,14 +20,20 @@ namespace DvlSql.Extensions
         {
             var instance = Activator.CreateInstance<T>();
             bool anyPropertySet = false;
-            foreach (var innerProp in typeof(T).GetProperties())
-                if (innerProp.PropertyType.Namespace == "System" &&
-                    !innerProp.PropertyType.IsGenericType(typeof(ICollection<>)) &&
-                    r[innerProp.Name] != DBNull.Value)
+            var type = typeof(T);
+            for (int i = 0; i < r.FieldCount; i++)
+            {
+                var fieldName = r.GetName(i);
+                var prop = type.GetProperty(fieldName);
+                if (prop != null &&
+                    prop.PropertyType.Namespace == "System" &&
+                    //!prop.PropertyType.IsGenericType(typeof(ICollection<>)) &&
+                    r[prop.Name] != DBNull.Value)
                 {
                     anyPropertySet = true;
-                    innerProp.SetValue(instance, r[innerProp.Name]);
+                    prop.SetValue(instance, r[prop.Name]);
                 }
+            }
 
             return anyPropertySet ? instance : defaultFunc == null ? default : defaultFunc();
         }
