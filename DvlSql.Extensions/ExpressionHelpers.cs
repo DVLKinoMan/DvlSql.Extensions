@@ -6,7 +6,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using static System.Exts.Extensions;
 
-namespace DvlSql.Extensions
+namespace DvlSql
 {
     public static class ExpressionHelpers
     {

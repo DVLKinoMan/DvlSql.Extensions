@@ -1,20 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Exts;
 
 namespace DvlSql.Extensions
 {
     public static class DataReader
     {
-        public static Func<IDataReader, TResult?> RecordReaderFunc<TResult>(Func<TResult>? defaultFunc = null)
-            => reader =>
-              {
-                  if (typeof(TResult).IsClass && typeof(TResult).Namespace != "System")
-                      return GetObjectOfType(reader, defaultFunc);
+        public static Func<IDataReader, TResult?> RecordReaderFunc<TResult>(Func<TResult>? defaultFunc = null) =>
+          reader =>
+          {
+              if (typeof(TResult).IsClass && typeof(TResult).Namespace != "System")
+                  return GetObjectOfType(reader, defaultFunc);
 
-                  return reader[0] != DBNull.Value ? (TResult?)reader[0] : defaultFunc == null ? default : defaultFunc();
-              };
+              return reader.FieldCount > 0 && reader[0] != DBNull.Value ? (TResult?)reader[0] : defaultFunc == null ? default : defaultFunc();
+          };
 
         public static T? GetObjectOfType<T>(this IDataReader r, Func<T>? defaultFunc = null)
         {
