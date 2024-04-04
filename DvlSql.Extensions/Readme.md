@@ -12,7 +12,7 @@ Feature 3: Added DataReaders
 Installation
 You can install DvlSql.Extensions via NuGet package manager:
 
-NuGet\Install-Package DvlSql.Extensions -Version 3.2.0
+NuGet\Install-Package DvlSql.Extensions -Version 3.2.1
 
 Documentation
 For detailed documentation and examples, please visit https://github.com/DVLKinoMan/DvlSql.SqlServer
