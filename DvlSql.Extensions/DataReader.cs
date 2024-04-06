@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Exts;
 
 namespace DvlSql.Extensions
 {
@@ -9,10 +10,34 @@ namespace DvlSql.Extensions
         public static Func<IDataReader, TResult?> RecordReaderFunc<TResult>(Func<TResult>? defaultFunc = null) =>
           reader =>
           {
-              if (typeof(TResult).IsClass && typeof(TResult).Namespace != "System")
+              if (typeof(TResult).IsRecord())
+              {
+                  object[] values = new object[reader.FieldCount];
+                  reader.GetValues(values);
+
+                  // Convert values to record type
+                  return (TResult?)typeof(TResult).CreateRecordInstance(values);
+              }
+
+              if (typeof(TResult).IsTuple())
+              {
+                  // Read values into tuple
+                  object[] values = new object[reader.FieldCount];
+                  reader.GetValues(values);
+
+                  // Convert values to tuple
+                  return (TResult?)Activator.CreateInstance(typeof(TResult), values);
+              }
+
+              if ((typeof(TResult).IsCustomClass()
+                  && System.Exts.Extensions.HasParameterlessConstructor<TResult>())
+                  || typeof(TResult).IsCustomStruct())//is struct or class 
                   return GetObjectOfType(reader, defaultFunc);
 
-              return reader.FieldCount > 0 && reader[0] != DBNull.Value ? (TResult?)reader[0] : defaultFunc == null ? default : defaultFunc();
+              return reader.FieldCount > 0 
+                     && reader[0] != DBNull.Value 
+                     ? (TResult?)reader[0] 
+                     : defaultFunc == null ? default : defaultFunc();
           };
 
         public static T? GetObjectOfType<T>(this IDataReader r, Func<T>? defaultFunc = null)
