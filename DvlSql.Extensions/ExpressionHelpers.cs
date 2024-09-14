@@ -167,40 +167,39 @@ public static class ExpressionHelpers
     public static DvlSqlValuesExpression<T> ValuesExp<T>(params T[] values) where T : ITuple =>
         new(values);
 
-    public static DvlSqlInnerJoinExpression InnerJoinExp<T>(string tableName,
+    public static DvlSqlInnerJoinExpression<T> InnerJoinExp<T>(string tableName,
         string firstTableMatchingCol, string secondTableMatchingCol)
         => new(tableName,
             MemberExp<T>(firstTableMatchingCol) == MemberExp<T>(secondTableMatchingCol));
 
-    public static DvlSqlLeftJoinExpression LeftJoinExp<T>(string tableName,
+    public static DvlSqlLeftJoinExpression<T> LeftJoinExp<T>(string tableName,
         string firstTableMatchingCol, string secondTableMatchingCol)
         => new(tableName,
             MemberExp<T>(firstTableMatchingCol) == MemberExp<T>(secondTableMatchingCol));
 
-    public static DvlSqlRightJoinExpression RightJoinExp<T>(string tableName,
+    public static DvlSqlRightJoinExpression<T> RightJoinExp<T>(string tableName,
         string firstTableMatchingCol, string secondTableMatchingCol)
         => new(tableName,
             MemberExp<T>(firstTableMatchingCol) == MemberExp<T>(secondTableMatchingCol));
 
-    public static DvlSqlFullJoinExpression FullJoinExp<T>(string tableName,
+    public static DvlSqlFullJoinExpression<T> FullJoinExp<T>(string tableName,
         string firstTableMatchingCol, string secondTableMatchingCol)
         => new(tableName,
             MemberExp<T>(firstTableMatchingCol) == MemberExp<T>(secondTableMatchingCol));
 
-    public static DvlSqlInnerJoinExpression InnerJoinExp(string tableName,
-        DvlSqlComparisonExpression comparisonExpression)
+    public static DvlSqlInnerJoinExpression<T> InnerJoinExp<T>(string tableName,
+        DvlSqlComparisonExpression<T> comparisonExpression)
         => new(tableName, comparisonExpression);
 
-    public static DvlSqlLeftJoinExpression LeftJoinExp(string tableName,
-        DvlSqlComparisonExpression comparisonExpression)
+    public static DvlSqlLeftJoinExpression<T> LeftJoinExp<T>(string tableName,
+        DvlSqlComparisonExpression<T> comparisonExpression)
         => new(tableName, comparisonExpression);
 
-    public static DvlSqlRightJoinExpression RightJoinExp(string tableName,
-        DvlSqlComparisonExpression comparisonExpression)
+    public static DvlSqlRightJoinExpression<T> RightJoinExp<T>(string tableName, DvlSqlComparisonExpression<T> comparisonExpression)
         => new(tableName, comparisonExpression);
 
-    public static DvlSqlFullJoinExpression FullJoinExp(string tableName,
-        DvlSqlComparisonExpression comparisonExpression)
+    public static DvlSqlFullJoinExpression<T> FullJoinExp<T>(string tableName,
+        DvlSqlComparisonExpression<T> comparisonExpression)
         => new(tableName, comparisonExpression);
 
     public static DvlSqlBinaryEmptyExpression EmptyExp() => new();
