@@ -69,11 +69,11 @@ public static class ExpressionHelpers
 
     public static DvlSqlSelectExpression SelectExp(int? topNum = null,
         params string[] paramNames) =>
-        new(paramNames.ToHashSet(), topNum);
+        new(paramNames.ToList(), topNum);
 
     public static DvlSqlSelectExpression SelectExp(IEnumerable<string> paramNames,
         int? topNum = null) =>
-        new(paramNames.ToHashSet(), topNum);
+        new(paramNames.ToList(), topNum);
 
     public static DvlSqlFromWithTableExpression FromExp(string tableName, string @as, bool withNoLock = false)
     {
@@ -112,7 +112,7 @@ public static class ExpressionHelpers
 
     public static DvlSqlSelectExpression SelectTopExp(int topNum,
         params string[] paramNames) =>
-        new(paramNames.ToHashSet(), topNum);
+        new(paramNames.ToList(), topNum);
 
     public static DvlSqlLikeExpression LikeExp(string field, string pattern) =>
         new(field, pattern);
